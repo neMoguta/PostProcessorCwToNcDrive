@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeGenerator\GoToSettings.cs" />
-    <Compile Include="CodeGenerator\NcDriveCodeGenerator.cs" />
-    <Compile Include="CodeGenerator\ValidOperations.cs" />
+    <Compile Include="CodeGenerator\CamOperations.cs" />
+    <Compile Include="CodeGenerator\CommandsFormer.cs" />
+    <Compile Include="CodeGenerator\Generator.cs" />
+    <Compile Include="CodeGenerator\MillMoveOperations.cs" />
+    <Compile Include="CodeGenerator\MillMoveSettings.cs" />
     <Compile Include="IncomeDataParser\Parser.cs" />
     <Compile Include="IncomeDataParser\OneLineInstruction.cs" />
     <Compile Include="Program.cs" />

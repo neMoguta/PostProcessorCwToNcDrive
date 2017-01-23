@@ -20,7 +20,7 @@ namespace PostProcessorCwToNcdrive
             var res = parcer.GetInstructions(contents);
 
 
-            var gen = new CodeGenerator.NcDriveCodeGenerator();
+            var gen = new CodeGenerator.Generator();
 
             var fin = gen.GenerateCode(res);
 

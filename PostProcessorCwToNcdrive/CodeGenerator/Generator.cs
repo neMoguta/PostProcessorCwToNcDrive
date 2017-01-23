@@ -8,14 +8,14 @@ using PostProcessorCwToNcdrive.IncomeDataParser;
 
 namespace PostProcessorCwToNcdrive.CodeGenerator
 {
-    public class NcDriveCodeGenerator
+    public class Generator
     {
         private const string UnexpectedIncomeFormat = "Unexpected income format";
         private const int ProgramStartLineNumber = 1;
-
+        
         private readonly MillMoveSettings _millMoveSettings;
 
-        public NcDriveCodeGenerator()
+        public Generator()
         {
             _millMoveSettings = new MillMoveSettings
             {
@@ -31,11 +31,9 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
         public Queue<string> GenerateCode(Queue<OneLineInstruction> instructionsSource)
         {
             var resultCode = new Queue<string>();
-            var line = ProgramStartLineNumber;
+            var lineNumber = ProgramStartLineNumber;
 
-            resultCode.Enqueue("%" + Environment.NewLine +
-                "(PART X-20 Y-40 Z-5 I80 J60 K0)" + Environment.NewLine +
-                "(TOOL T01 D3)");
+            resultCode.Enqueue(CommandsFormer.ProgramStartMessage);
 
             foreach (var instruction in instructionsSource)
             {
@@ -44,51 +42,51 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                 switch (instruction.Name)
                 {
                     case CamOperations.OperationStart:
-                        EnqueueOperationHeader(resultCode, operationName: operationParams[0]);
+                       CommandsFormer.EnqueueOperationHeader(resultCode, operationName: operationParams[0]);
                         break;
 
                     case CamOperations.OperationEnd:
-                        EnqueueOperationFooter(resultCode, operationName: operationParams[0]);
+                        CommandsFormer.EnqueueOperationFooter(resultCode, operationName: operationParams[0]);
                         break;
 
                     case CamOperations.FeedRate:
-                        EnqueueSetOperationFeedRate(resultCode, currentLineNumber: line, feedRate: operationParams[1]);
-                        line++;
+                        CommandsFormer.EnqueueSetOperationFeedRate(resultCode, currentLineNumber: lineNumber, feedRate: operationParams[1]);
+                        lineNumber++;
                         break;
 
                     case CamOperations.RapidMove:
-                        EnqueueRapidMoveSetting(resultCode, currentLineNumber: line);
-                        line++;
+                        CommandsFormer.EnqueueRapidMoveSetting(resultCode, currentLineNumber: lineNumber);
+                        lineNumber++;
                         break;
 
                     case CamOperations.MillMove:
                         if (_millMoveSettings.DrillCycleOn)
                         {
-                            line = Drill(resultCode, line, operationParams, _millMoveSettings.DrillCommand);
+                            lineNumber = Drill(resultCode, lineNumber, operationParams, _millMoveSettings.DrillCommand);
                         }
                         else if (_millMoveSettings.WriteCircle)
                         {
                             var opCode = _millMoveSettings.Counterclockwise ? " G03" : " G02";
 
                             resultCode.Enqueue(
-                                "N" + line + opCode +
+                                "N" + lineNumber + opCode +
                                 " X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2] +
                                 " I" + _millMoveSettings.CircleCenter[0] + " J" + _millMoveSettings.CircleCenter[1] + " K" + _millMoveSettings.CircleCenter[2]);
-                            line++;
+                            lineNumber++;
                             _millMoveSettings.WriteCircle = false;
                         }
                         else if (_millMoveSettings.Rapid)
                         {
                             resultCode.Enqueue(
-                                "N" + line + " X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2]);
+                                "N" + lineNumber + " X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2]);
                             _millMoveSettings.Rapid = false;
-                            line++;
+                            lineNumber++;
                         }
                         else
                         {
                             resultCode.Enqueue(
-                                "N" + line + " G01 X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2]);
-                            line++;
+                                "N" + lineNumber + " G01 X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2]);
+                            lineNumber++;
                         }
                         break;
 
@@ -129,26 +127,6 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             }
 
             return resultCode;
-        }
-
-        private void EnqueueOperationHeader(Queue<string> ncDriveProgram, string operationName)
-        {
-            ncDriveProgram.Enqueue("(Start: " + operationName + ")");
-        }
-
-        private void EnqueueOperationFooter(Queue<string> ncDriveProgram, string operationName)
-        {
-            ncDriveProgram.Enqueue("(End: " + operationName + ")");
-        }
-
-        private void EnqueueSetOperationFeedRate(Queue<string> ncDriveProgram, int currentLineNumber, string feedRate)
-        {
-            ncDriveProgram.Enqueue("N" + currentLineNumber + " F" + feedRate);
-        }
-
-        private void EnqueueRapidMoveSetting(Queue<string> ncDriveProgram, int currentLineNumber)
-        {
-            ncDriveProgram.Enqueue("N" + currentLineNumber + " G00");
         }
 
         private int Drill(Queue<string> results, int currentRow, string[] operationParams, string drillCommand)
