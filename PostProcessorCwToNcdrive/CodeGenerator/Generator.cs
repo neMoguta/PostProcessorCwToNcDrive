@@ -55,7 +55,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                         break;
 
                     case CamOperations.RapidMove:
-                        CommandsFormer.EnqueueRapidMoveSetting(resultCode, currentLineNumber: lineNumber);
+                        CommandsFormer.EnqueueRapidMoveOn(resultCode, currentLineNumber: lineNumber);
                         lineNumber++;
                         break;
 
@@ -72,8 +72,9 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                                 "N" + lineNumber + opCode +
                                 " X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2] +
                                 " I" + _millMoveSettings.CircleCenter[0] + " J" + _millMoveSettings.CircleCenter[1] + " K" + _millMoveSettings.CircleCenter[2]);
-                            lineNumber++;
+                            
                             _millMoveSettings.WriteCircle = false;
+                            lineNumber++;                         
                         }
                         else if (_millMoveSettings.Rapid)
                         {

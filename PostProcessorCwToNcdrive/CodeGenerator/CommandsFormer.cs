@@ -32,7 +32,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             ncDriveProgram.Enqueue("N" + currentLineNumber + " F" + feedRate);
         }
 
-        public static void EnqueueRapidMoveSetting(Queue<string> ncDriveProgram, int currentLineNumber)
+        public static void EnqueueRapidMoveOn(Queue<string> ncDriveProgram, int currentLineNumber)
         {
             ncDriveProgram.Enqueue("N" + currentLineNumber + " G00");
         }

@@ -19,6 +19,8 @@ namespace PostProcessorCwToNcdrive
             Parser parcer = new Parser();
             var res = parcer.GetInstructions(contents);
 
+            File.WriteAllText(@"C:\Temp\Data\rawResult.txt",
+                res.Select((line)=>line.Name+" "+line.InstructionParams.Aggregate((p1,p2)=>p1+";"+p2)).Aggregate((l1,l2)=>l1+Environment.NewLine +l2));
 
             var gen = new CodeGenerator.Generator();
 
