@@ -63,7 +63,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                         break;
 
                     case CamOperations.Cycle:
-                        DillInCycle(operationParams);
+                        SetDillInCycleSettings(operationParams);
                         break;
 
                     case CamOperations.Circle:
@@ -93,21 +93,23 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             _millMoveSettings.WriteCircle = true;
         }
 
-        private void DillInCycle(string[] operationParams)
+        private void SetDillInCycleSettings(string[] operationParams)
         {
-            if (operationParams[0].Contains("ON"))
+            var header = operationParams[0];
+
+            if (header.Contains("ON"))
             {
                 _millMoveSettings.DrillCycleOn = true;
             }
-            if (operationParams[0].Contains("OFF"))
+            if (header.Contains("OFF"))
             {
                 _millMoveSettings.DrillCycleOn = false;
             }
-            if (operationParams[0].Contains("CDRILL"))
+            if (header.Contains("CDRILL"))
             {
                 _millMoveSettings.DrillCommand = " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F500 H3";
             }
-            else if (operationParams[0].Contains("DRILL"))
+            else if (header.Contains("DRILL"))
             {
                 _millMoveSettings.DrillCommand = " G84" + " Z-" + operationParams[2] + " D100" + operationParams[2] + " F500 H3";
             }

@@ -14,6 +14,11 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             }
         }
 
+        public static void FormDrillCommand()
+        {
+            _millMoveSettings.DrillCommand = " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F500 H3";
+        }
+
         public static void EnqueueOperationHeader(Queue<string> ncDriveProgram, string operationName)
         {
             ncDriveProgram.Enqueue("(Start: " + operationName + ")");
