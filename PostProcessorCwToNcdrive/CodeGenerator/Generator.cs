@@ -27,15 +27,15 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             };
         }
 
-        public Queue<string> GenerateMillProgramm(Queue<Instruction> instructionsSource)
+        public Queue<string> GenerateMillProgramm(Queue<Command> instructionsSource)
         {
             var millProgramm = new Queue<string>();
             var currentline = StartLine;
-            millProgramm.Enqueue(CommandsFormer.ProgramStartMessage);
+            millProgramm.Enqueue(Commander.ProgramStartMessage);
 
             foreach (var instruction in instructionsSource)
             {
-                var operationParams = instruction.InstructionParams;
+                var operationParams = instruction.CommandParams;
 
                 if (operationParams.Length!=3)
                     throw new IndexOutOfRangeException(
@@ -44,20 +44,20 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                 switch (instruction.Name)
                 {
                     case Operations.OperationStart:
-                       CommandsFormer.EnqueueOperationHeader(millProgramm, operationName: operationParams[0]);
+                       Commander.EnqueueOperationHeader(millProgramm, operationName: operationParams[0]);
                         break;
 
                     case Operations.OperationEnd:
-                        CommandsFormer.EnqueueOperationFooter(millProgramm, operationName: operationParams[0]);
+                        Commander.EnqueueOperationFooter(millProgramm, operationName: operationParams[0]);
                         break;
 
                     case Operations.FeedRate:
-                        CommandsFormer.EnqueueSetFeedRate(millProgramm, currentline, feedRate: operationParams[1]);
+                        Commander.EnqueueSetFeedRate(millProgramm, currentline, feedRate: operationParams[1]);
                         currentline++;
                         break;
 
                     case Operations.RapidMove:
-                        CommandsFormer.EnqueueRapidMoveOn(millProgramm, currentline);
+                        Commander.EnqueueRapidMoveOn(millProgramm, currentline);
                         currentline++;
                         break;
 
