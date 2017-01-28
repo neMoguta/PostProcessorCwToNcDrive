@@ -6,14 +6,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using NLog;
 using PostProcessorCwToNcdrive.IncomeDataParser;
 
 namespace PostProcessorCwToNcdrive
 {
     class Program
     {
+        private static Logger _logger;
         static void Main(string[] args)
         {
+            _logger = LogManager.GetCurrentClassLogger();
+
+            _logger.Info("test log start");
+
             IEnumerable<string> contents = File.ReadAllLines(Environment.CurrentDirectory + @"\UniSource.clt", Encoding.Default);
 
             Parser parcer = new Parser();
@@ -29,6 +35,8 @@ namespace PostProcessorCwToNcdrive
             File.WriteAllText(
                 Environment.CurrentDirectory + @"\GCode.txt",
                 fin.Aggregate((x, y) => x + Environment.NewLine + y), Encoding.Default);
+
+            _logger.Info("Test log stop");
         }
     }
 }

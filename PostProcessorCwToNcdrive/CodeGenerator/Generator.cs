@@ -1,7 +1,6 @@
 ﻿// Converter .clt programm to ncDrive programm
 // Vyacheslav Sergeev, vyacheslav.mgtu@mail.ru
 
-using System;
 using System.Collections.Generic;
 using PostProcessorCwToNcdrive.IncomeDataParser;
 
@@ -13,7 +12,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
         {
             var millProgramm = new Queue<string>();
             var currentline = StartLine;
-            millProgramm.Enqueue(Commander.ProgramStartMessage);
+            millProgramm.Enqueue(ProgramStartMessage);
 
             foreach (var instruction in instructionsSource)
             {
@@ -21,33 +20,33 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
 
                 switch (instruction.Name)
                 {
-                    case Operations.OperationStart:
-                        Commander.EnqueueOperationHeader(millProgramm, operationName: operationSettings[0]);
+                    case CamOperations.OperationStart:
+                        EnqueueOperationHeader(millProgramm, operationName: operationSettings[0]);
                         break;
 
-                    case Operations.OperationEnd:
-                        Commander.EnqueueOperationFooter(millProgramm, operationName: operationSettings[0]);
+                    case CamOperations.OperationEnd:
+                        EnqueueOperationFooter(millProgramm, operationName: operationSettings[0]);
                         break;
 
-                    case Operations.FeedRate:
-                        Commander.EnqueueSetFeedRate(millProgramm, currentline, feedRate: operationSettings[1]);
+                    case CamOperations.SetFeedRate:
+                        EnqueueSetFeedRate(millProgramm, currentline, feedRate: operationSettings[1]);
                         currentline++;
                         break;
 
-                    case Operations.RapidMove:
-                        Commander.EnqueueRapidMoveOn(millProgramm, currentline);
+                    case CamOperations.RapidMove:
+                        EnqueueRapidMoveOn(millProgramm, currentline);
                         currentline++;
                         break;
 
-                    case Operations.MillMove:
+                    case CamOperations.MillMove:
                         currentline = EnqueueMillMove(millProgramm, currentline, operationSettings);
                         break;
 
-                    case Operations.Cycle:
+                    case CamOperations.Cycle:
                         SetCycleDrillSettings(operationSettings);
                         break;
 
-                    case Operations.Circle:
+                    case CamOperations.Circle:
                         SetCircleMoveSettings(operationSettings);
                         break;
                     default:
