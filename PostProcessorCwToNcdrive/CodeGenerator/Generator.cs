@@ -13,11 +13,11 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
         private const string IncomeFormatParseError = "Unexpected income format";
         private const int ProgramStartLineNumber = 1;
         
-        private readonly MillMoveSettings _millMoveSettings;
+        private readonly Settings _millMoveSettings;
 
         public Generator()
         {
-            _millMoveSettings = new MillMoveSettings
+            _millMoveSettings = new Settings
             {
                 CircleCenter = new string[3],
                 WriteCircle = false,
@@ -28,7 +28,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             };
         }
 
-        public Queue<string> GenerateCode(Queue<OneLineInstruction> instructionsSource)
+        public Queue<string> GenerateCode(Queue<Instruction> instructionsSource)
         {
             var resultProgram = new Queue<string>();
             var currecntLineNumber = ProgramStartLineNumber;
@@ -40,33 +40,33 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
 
                 switch (instruction.Name)
                 {
-                    case CamOperations.OperationStart:
+                    case Operations.OperationStart:
                        CommandsFormer.EnqueueOperationHeader(resultProgram, operationName: operationParams[0]);
                         break;
 
-                    case CamOperations.OperationEnd:
+                    case Operations.OperationEnd:
                         CommandsFormer.EnqueueOperationFooter(resultProgram, operationName: operationParams[0]);
                         break;
 
-                    case CamOperations.FeedRate:
-                        CommandsFormer.EnqueueSetOperationFeedRate(resultProgram, currentLineNumber: currecntLineNumber, feedRate: operationParams[1]);
+                    case Operations.FeedRate:
+                        CommandsFormer.EnqueueSetFeedRate(resultProgram, currentLineNumber: currecntLineNumber, feedRate: operationParams[1]);
                         currecntLineNumber++;
                         break;
 
-                    case CamOperations.RapidMove:
+                    case Operations.RapidMove:
                         CommandsFormer.EnqueueRapidMoveOn(resultProgram, currecntLineNumber);
                         currecntLineNumber++;
                         break;
 
-                    case CamOperations.MillMove:
+                    case Operations.MillMove:
                         currecntLineNumber = MillMove(currecntLineNumber, resultProgram, operationParams);
                         break;
 
-                    case CamOperations.Cycle:
+                    case Operations.Cycle:
                         SetDillInCycleSettings(operationParams);
                         break;
 
-                    case CamOperations.Circle:
+                    case Operations.Circle:
                         SetSettingsForCircle(operationParams);
                         break;
                     default:

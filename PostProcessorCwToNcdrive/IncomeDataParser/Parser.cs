@@ -9,9 +9,9 @@ namespace PostProcessorCwToNcdrive.IncomeDataParser
 {
     public class Parser
     {
-        public Queue<OneLineInstruction> GetInstructions(IEnumerable<string> camWorksInstructions)
+        public Queue<Instruction> GetInstructions(IEnumerable<string> camWorksInstructions)
         {
-            var instructions = new Queue<OneLineInstruction>();
+            var instructions = new Queue<Instruction>();
 
             foreach (var line in camWorksInstructions)
             {
@@ -22,7 +22,7 @@ namespace PostProcessorCwToNcdrive.IncomeDataParser
                 var name = currentLine.Substring(0, instructionEndIndex).Trim();
                 var operationParams = currentLine.Substring(instructionEndIndex + 1).Trim().Split(',');
 
-                var oneLine = new OneLineInstruction
+                var oneLine = new Instruction
                 {
                     Name = name,
                     InstructionParams = operationParams

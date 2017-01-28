@@ -14,9 +14,9 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             }
         }
 
-        public static void FormDrillCommand()
+        public static void FormDrillCommand(IList<string> operationParams, Settings millMoveSettings )
         {
-            _millMoveSettings.DrillCommand = " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F500 H3";
+            millMoveSettings.DrillCommand = " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F500 H3";
         }
 
         public static void EnqueueOperationHeader(Queue<string> ncDriveProgram, string operationName)
@@ -29,7 +29,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             ncDriveProgram.Enqueue("(End: " + operationName + ")");
         }
 
-        public static void EnqueueSetOperationFeedRate(Queue<string> ncDriveProgram, int currentLineNumber, string feedRate)
+        public static void EnqueueSetFeedRate(Queue<string> ncDriveProgram, int currentLineNumber, string feedRate)
         {
             ncDriveProgram.Enqueue("N" + currentLineNumber + " F" + feedRate);
         }
