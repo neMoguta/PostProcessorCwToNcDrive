@@ -20,7 +20,7 @@ namespace PostProcessorCwToNcdrive
             var res = parcer.GetInstructions(contents);
 
             File.WriteAllText(@"C:\Temp\Data\rawResult.txt",
-                res.Select((line)=>line.Name+" "+line.CommandParams.Aggregate((p1,p2)=>p1+";"+p2)).Aggregate((l1,l2)=>l1+Environment.NewLine +l2));
+                res.Select((line)=>line.Name+" "+line.Settings.Aggregate((p1,p2)=>p1+";"+p2)).Aggregate((l1,l2)=>l1+Environment.NewLine +l2));
 
             var gen = new CodeGenerator.Generator();
 

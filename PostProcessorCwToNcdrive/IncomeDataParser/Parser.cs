@@ -25,7 +25,7 @@ namespace PostProcessorCwToNcdrive.IncomeDataParser
                 var oneLine = new Command
                 {
                     Name = name,
-                    CommandParams = operationParams
+                    Settings = operationParams
                 };
 
                 instructions.Enqueue(oneLine);
