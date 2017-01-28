@@ -24,7 +24,7 @@ namespace PostProcessorCwToNcdrive
 
             var gen = new CodeGenerator.Generator();
 
-            var fin = gen.GenerateCode(res);
+            var fin = gen.GenerateMillProgramm(res);
 
             File.WriteAllText(
                 Environment.CurrentDirectory + @"\GCode.txt",

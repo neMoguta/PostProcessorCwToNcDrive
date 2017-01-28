@@ -11,13 +11,12 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
     public class Generator
     {
         private const string IncomeFormatParseError = "Unexpected income format";
-        private const int ProgramStartLineNumber = 1;
-        
-        private readonly Settings _millMoveSettings;
+        private const int StartLine = 1;
+        private readonly Settings _settingsBufer;
 
         public Generator()
         {
-            _millMoveSettings = new Settings
+            _settingsBufer  = new Settings
             {
                 CircleCenter = new string[3],
                 WriteCircle = false,
@@ -28,38 +27,42 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             };
         }
 
-        public Queue<string> GenerateCode(Queue<Instruction> instructionsSource)
+        public Queue<string> GenerateMillProgramm(Queue<Instruction> instructionsSource)
         {
-            var resultProgram = new Queue<string>();
-            var currecntLineNumber = ProgramStartLineNumber;
-            resultProgram.Enqueue(CommandsFormer.ProgramStartMessage);
+            var millProgramm = new Queue<string>();
+            var currentline = StartLine;
+            millProgramm.Enqueue(CommandsFormer.ProgramStartMessage);
 
             foreach (var instruction in instructionsSource)
             {
-                var operationParams = instruction.InstructionParams.ToArray();
+                var operationParams = instruction.InstructionParams;
+
+                if (operationParams.Length!=3)
+                    throw new IndexOutOfRangeException(
+                        string.Format("Unexpected operation params count, expected 3, actual: {0}", operationParams.Length));
 
                 switch (instruction.Name)
                 {
                     case Operations.OperationStart:
-                       CommandsFormer.EnqueueOperationHeader(resultProgram, operationName: operationParams[0]);
+                       CommandsFormer.EnqueueOperationHeader(millProgramm, operationName: operationParams[0]);
                         break;
 
                     case Operations.OperationEnd:
-                        CommandsFormer.EnqueueOperationFooter(resultProgram, operationName: operationParams[0]);
+                        CommandsFormer.EnqueueOperationFooter(millProgramm, operationName: operationParams[0]);
                         break;
 
                     case Operations.FeedRate:
-                        CommandsFormer.EnqueueSetFeedRate(resultProgram, currentLineNumber: currecntLineNumber, feedRate: operationParams[1]);
-                        currecntLineNumber++;
+                        CommandsFormer.EnqueueSetFeedRate(millProgramm, currentline, feedRate: operationParams[1]);
+                        currentline++;
                         break;
 
                     case Operations.RapidMove:
-                        CommandsFormer.EnqueueRapidMoveOn(resultProgram, currecntLineNumber);
-                        currecntLineNumber++;
+                        CommandsFormer.EnqueueRapidMoveOn(millProgramm, currentline);
+                        currentline++;
                         break;
 
                     case Operations.MillMove:
-                        currecntLineNumber = MillMove(currecntLineNumber, resultProgram, operationParams);
+                        currentline = MillMove(currentline, millProgramm, operationParams);
                         break;
 
                     case Operations.Cycle:
@@ -67,30 +70,30 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                         break;
 
                     case Operations.Circle:
-                        SetSettingsForCircle(operationParams);
+                        SetSettingsForCircleMove(operationParams);
                         break;
                     default:
                         break;
                 }
             }
 
-            return resultProgram;
+            return millProgramm;
         }
 
-        private void SetSettingsForCircle(string[] operationParams)
+        private void SetSettingsForCircleMove(string[] operationParams)
         {
-            _millMoveSettings.CircleCenter[0] = operationParams[0];
-            _millMoveSettings.CircleCenter[1] = operationParams[1];
-            _millMoveSettings.CircleCenter[2] = operationParams[2];
+            _settingsBufer.CircleCenter[0] = operationParams[0];
+            _settingsBufer.CircleCenter[1] = operationParams[1];
+            _settingsBufer.CircleCenter[2] = operationParams[2];
 
             if (operationParams[7] == "COUNTERCLOCKWISE")
-                _millMoveSettings.Counterclockwise = true;
+                _settingsBufer.Counterclockwise = true;
             else if (operationParams[7] == "CLOCKWISE")
-                _millMoveSettings.Counterclockwise = false;
+                _settingsBufer.Counterclockwise = false;
             else
                 throw new Exception(IncomeFormatParseError);
 
-            _millMoveSettings.WriteCircle = true;
+            _settingsBufer.WriteCircle = true;
         }
 
         private void SetDillInCycleSettings(string[] operationParams)
@@ -99,46 +102,46 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
 
             if (header.Contains("ON"))
             {
-                _millMoveSettings.DrillCycleOn = true;
+                _settingsBufer.DrillCycleOn = true;
             }
             if (header.Contains("OFF"))
             {
-                _millMoveSettings.DrillCycleOn = false;
+                _settingsBufer.DrillCycleOn = false;
             }
             if (header.Contains("CDRILL"))
             {
-                _millMoveSettings.DrillCommand = " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F500 H3";
+                _settingsBufer.DrillCommand = " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F500 H3";
             }
             else if (header.Contains("DRILL"))
             {
-                _millMoveSettings.DrillCommand = " G84" + " Z-" + operationParams[2] + " D100" + operationParams[2] + " F500 H3";
+                _settingsBufer.DrillCommand = " G84" + " Z-" + operationParams[2] + " D100" + operationParams[2] + " F500 H3";
             }
         }
 
         private int MillMove(int lineNumber, Queue<string> resultCode, string[] operationParams)
         {
-            if (_millMoveSettings.DrillCycleOn)
+            if (_settingsBufer.DrillCycleOn)
             {
-                lineNumber = Drill(resultCode, lineNumber, operationParams, _millMoveSettings.DrillCommand);
+                lineNumber = Drill(resultCode, lineNumber, operationParams, _settingsBufer.DrillCommand);
             }
-            else if (_millMoveSettings.WriteCircle)
+            else if (_settingsBufer.WriteCircle)
             {
-                var opCode = _millMoveSettings.Counterclockwise ? " G03" : " G02";
+                var opCode = _settingsBufer.Counterclockwise ? " G03" : " G02";
 
                 resultCode.Enqueue(
                     "N" + lineNumber + opCode +
                     " X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2] +
-                    " I" + _millMoveSettings.CircleCenter[0] + " J" + _millMoveSettings.CircleCenter[1] + " K" +
-                    _millMoveSettings.CircleCenter[2]);
+                    " I" + _settingsBufer.CircleCenter[0] + " J" + _settingsBufer.CircleCenter[1] + " K" +
+                    _settingsBufer.CircleCenter[2]);
 
-                _millMoveSettings.WriteCircle = false;
+                _settingsBufer.WriteCircle = false;
                 lineNumber++;
             }
-            else if (_millMoveSettings.Rapid)
+            else if (_settingsBufer.Rapid)
             {
                 resultCode.Enqueue(
                     "N" + lineNumber + " X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2]);
-                _millMoveSettings.Rapid = false;
+                _settingsBufer.Rapid = false;
                 lineNumber++;
             }
             else

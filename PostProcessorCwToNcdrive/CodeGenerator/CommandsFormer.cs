@@ -29,14 +29,14 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             ncDriveProgram.Enqueue("(End: " + operationName + ")");
         }
 
-        public static void EnqueueSetFeedRate(Queue<string> ncDriveProgram, int currentLineNumber, string feedRate)
+        public static void EnqueueSetFeedRate(Queue<string> ncDriveProgram, int currentLine, string feedRate)
         {
-            ncDriveProgram.Enqueue("N" + currentLineNumber + " F" + feedRate);
+            ncDriveProgram.Enqueue("N" + currentLine + " F" + feedRate);
         }
 
-        public static void EnqueueRapidMoveOn(Queue<string> ncDriveProgram, int currentLineNumber)
+        public static void EnqueueRapidMoveOn(Queue<string> ncDriveProgram, int currentLine)
         {
-            ncDriveProgram.Enqueue("N" + currentLineNumber + " G00");
+            ncDriveProgram.Enqueue("N" + currentLine + " G00");
         }
     }
 }
