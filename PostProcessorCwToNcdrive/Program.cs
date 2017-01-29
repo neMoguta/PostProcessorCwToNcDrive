@@ -22,8 +22,8 @@ namespace PostProcessorCwToNcdrive
 
             IEnumerable<string> contents = File.ReadAllLines(Environment.CurrentDirectory + @"\UniSource.clt", Encoding.Default);
 
-            Parser parcer = new Parser();
-            var res = parcer.GetInstructions(contents);
+            Parser parser = new Parser();
+            var res = parser.GetInstructions(contents);
 
             File.WriteAllText(@"C:\Temp\Data\rawResult.txt",
                 res.Select((line)=>line.Name+" "+line.Settings.Aggregate((p1,p2)=>p1+";"+p2)).Aggregate((l1,l2)=>l1+Environment.NewLine +l2));
