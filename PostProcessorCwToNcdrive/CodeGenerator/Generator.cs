@@ -9,14 +9,14 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
 {
     public class Generator : GeneratorBase
     {
-        private Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         public Queue<string> GenerateMillProgramm(Queue<Command> instructionsSource)
         {
             _logger.Info("Start generate mill programm");
             var millProgramm = new Queue<string>();
             var currentline = StartLine;
-            millProgramm.Enqueue(ProgramStartMessage);
 
+            millProgramm.Enqueue(ProgramStartMessage);
             _logger.Info("Start message enqueued");
 
             foreach (var instruction in instructionsSource)

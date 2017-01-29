@@ -14,29 +14,39 @@ namespace PostProcessorCwToNcdrive
     class Program
     {
         private static Logger _logger;
-        static void Main(string[] args)
+        static void Main()
         {
-            _logger = LogManager.GetCurrentClassLogger();
+            try
+            {
 
-            _logger.Info("Test log start");
+                _logger = LogManager.GetCurrentClassLogger();
 
-            IEnumerable<string> contents = File.ReadAllLines(Environment.CurrentDirectory + @"\UniSource.clt", Encoding.Default);
+                _logger.Info("Program start");
 
-            Parser parser = new Parser();
-            var res = parser.GetInstructions(contents);
+                IEnumerable<string> contents = File.ReadAllLines(Environment.CurrentDirectory + @"\UniSource.clt",
+                    Encoding.Default);
 
-            File.WriteAllText(@"C:\Temp\Data\rawResult.txt",
-                res.Select((line)=>line.Name+" "+line.Settings.Aggregate((p1,p2)=>p1+";"+p2)).Aggregate((l1,l2)=>l1+Environment.NewLine +l2));
+                Parser parser = new Parser();
+                var res = parser.GetInstructions(contents);
 
-            var gen = new CodeGenerator.Generator();
+                File.WriteAllText(@"C:\Temp\Data\rawResult.txt",
+                    res.Select(line => line.Name + " " + line.Settings.Aggregate((p1, p2) => p1 + ";" + p2))
+                        .Aggregate((l1, l2) => l1 + Environment.NewLine + l2));
 
-            var fin = gen.GenerateMillProgramm(res);
+                var gen = new CodeGenerator.Generator();
 
-            File.WriteAllText(
-                Environment.CurrentDirectory + @"\GCode.txt",
-                fin.Aggregate((x, y) => x + Environment.NewLine + y), Encoding.Default);
+                var fin = gen.GenerateMillProgramm(res);
 
-            _logger.Info("Test log stop");
+                File.WriteAllText(
+                    Environment.CurrentDirectory + @"\GCode.txt",
+                    fin.Aggregate((x, y) => x + Environment.NewLine + y), Encoding.Default);
+
+                _logger.Info("Program stop"+Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Fatal program error.");
+            }
         }
     }
 }
