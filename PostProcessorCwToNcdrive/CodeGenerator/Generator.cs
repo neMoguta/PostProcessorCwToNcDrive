@@ -2,17 +2,22 @@
 // Vyacheslav Sergeev, vyacheslav.mgtu@mail.ru
 
 using System.Collections.Generic;
+using NLog;
 using PostProcessorCwToNcdrive.IncomeDataParser;
 
 namespace PostProcessorCwToNcdrive.CodeGenerator
 {
     public class Generator : GeneratorBase
     {
+        private Logger _logger = LogManager.GetCurrentClassLogger();
         public Queue<string> GenerateMillProgramm(Queue<Command> instructionsSource)
         {
+            _logger.Info("Start generate mill programm");
             var millProgramm = new Queue<string>();
             var currentline = StartLine;
             millProgramm.Enqueue(ProgramStartMessage);
+
+            _logger.Info("Start message enqueued");
 
             foreach (var instruction in instructionsSource)
             {
@@ -53,6 +58,8 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                         break;
                 }
             }
+
+            _logger.Info("Finish generate mill programm");
 
             return millProgramm;
         }

@@ -18,7 +18,7 @@ namespace PostProcessorCwToNcdrive
         {
             _logger = LogManager.GetCurrentClassLogger();
 
-            _logger.Info("test log start");
+            _logger.Info("Test log start");
 
             IEnumerable<string> contents = File.ReadAllLines(Environment.CurrentDirectory + @"\UniSource.clt", Encoding.Default);
 
