@@ -13,10 +13,12 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
         public Queue<string> GenerateMillProgramm(Queue<Command> instructionsSource)
         {
             _logger.Info("Start generate mill programm");
+
             var millProgramm = new Queue<string>();
             var currentline = StartLine;
 
             millProgramm.Enqueue(ProgramStartMessage);
+
             _logger.Info("Start message enqueued");
 
             foreach (var instruction in instructionsSource)

@@ -1,6 +1,4 @@
-%
-(PART X-20 Y-40 Z-5 I80 J60 K0)
-(TOOL T01 D3)
+Program start
 (Start: Drill1-Hole1)
 N1 G00
 N2 G01 X-30.000000 Y-15.000000 Z25.000000
