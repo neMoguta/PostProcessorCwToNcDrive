@@ -28,7 +28,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                 switch (instruction.Name)
                 {
                     case CamOperations.OperationStart:
-                        EnqueueOperationHeader(millProgramm, operationName: operationSettings[0]);
+                        EnqueueOperationHeader(millProgramm, operationHeader: operationSettings[0]);
                         break;
 
                     case CamOperations.OperationEnd:
