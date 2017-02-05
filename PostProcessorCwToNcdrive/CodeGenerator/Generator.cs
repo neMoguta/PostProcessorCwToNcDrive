@@ -57,6 +57,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                         SetCircleMoveSettings(operationSettings);
                         break;
                     default:
+                        _logger.Warn("Instruction {0} was not opperated", instruction.Name);
                         break;
                 }
             }

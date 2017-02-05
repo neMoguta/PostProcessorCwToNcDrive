@@ -18,7 +18,6 @@ namespace PostProcessorCwToNcdrive
         {
             try
             {
-
                 _logger = LogManager.GetCurrentClassLogger();
 
                 _logger.Info("Program start");
