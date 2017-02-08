@@ -32,7 +32,8 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                         break;
 
                     case CamOperations.OperationEnd:
-                        EnqueueOperationFooter(millProgramm, operationName: operationSettings[0]);
+                        EnqueueOperationFooter(millProgramm, currentline, operationName: operationSettings[0]);
+                        currentline++;
                         break;
 
                     case CamOperations.SetFeedRate:
