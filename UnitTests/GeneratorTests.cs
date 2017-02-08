@@ -69,8 +69,8 @@ namespace UnitTests
         {
             var validPairs = new Dictionary<string, Settings>
             {
-                {"ON", new Settings{ DrillCycleOn=true, MillMoveType = MillMoveTypes.Drill}},
-                {"OFF", new Settings{DrillCycleOn = false, MillMoveType = MillMoveTypes.Drill}},
+                {"ON", new Settings{ MillMoveType = MillMoveTypes.Drill}},
+                {"OFF", new Settings{ MillMoveType = MillMoveTypes.Drill}},
                 {"CDRILL", new Settings{DrillCommand = " G84" + " Z-" + "OpParam" + " D100" + "OpParam" + " F500 H3", MillMoveType = MillMoveTypes.Drill}},
                 {"DRILL", new Settings{DrillCommand = " G84" + " Z-" + "OpParam2" + " D100" + "OpParam2" + " F500 H3", MillMoveType = MillMoveTypes.Drill}}
             };
@@ -198,6 +198,21 @@ namespace UnitTests
             generator.EnqueueMillMove(programm, 0, operationParams);
 
             Assert.IsTrue(programm.Dequeue().Equals("N0 X11 Y22 Z33"));
+        }
+
+        [TestMethod]
+        public void EnqueueNotSupportedOpperation()
+        {
+            var programm = new Queue<string>();
+            var generator = new GeneratorBase
+            {
+                SettingsBuffer =
+                {
+                    MillMoveType = MillMoveTypes.Undefine
+                }
+            };
+            generator.EnqueueMillMove(programm, 0, new[] { "", "", "" });
+            Assert.IsTrue(programm.Count == 0);
         }
 
         [TestMethod]

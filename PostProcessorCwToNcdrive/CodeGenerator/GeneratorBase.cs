@@ -86,12 +86,6 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
 
             switch (operationParams[0])
             {
-                case "ON":
-                    SettingsBuffer.DrillCycleOn = true;
-                    break;
-                case "OFF":
-                    SettingsBuffer.DrillCycleOn = false;
-                    break;
                 case "CDRILL":
                     SettingsBuffer.DrillCommand =
                         " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F500 H3";
@@ -101,7 +95,7 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
                         " G84" + " Z-" + operationParams[2] + " D100" + operationParams[2] + " F500 H3";
                     break;
                 default:
-                    _logger.Warn("Operation {0} was not buffered", operationParams[0]);
+                    _logger.Debug("Operation {0} was not buffered", operationParams[0]);
                     break;
             }
 

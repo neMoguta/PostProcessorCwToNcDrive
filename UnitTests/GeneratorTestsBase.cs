@@ -42,10 +42,5 @@ namespace UnitTests
         {
             return GenerateTestProgram((program, line, name) => func(program, name), null, header);
         }
-
-        protected Queue<string> GenerateTestProgram(Action<string[], Settings> func, Settings millMoveSettings)
-        {
-            return GenerateTestProgram((program, line, name) => func(new string[3], millMoveSettings), null, null);
-        }
     }
 }
