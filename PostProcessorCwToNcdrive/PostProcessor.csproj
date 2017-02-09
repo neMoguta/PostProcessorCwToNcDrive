@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommandLine">
+      <HintPath>lib\CommandLine.dll</HintPath>
+    </Reference>
     <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=3.6.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
@@ -56,6 +59,7 @@
     <Compile Include="CodeGenerator\Settings.cs" />
     <Compile Include="IncomeDataParser\Parser.cs" />
     <Compile Include="IncomeDataParser\Command.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

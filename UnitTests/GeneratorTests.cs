@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PostProcessorCwToNcdrive.CodeGenerator;
 using PostProcessorCwToNcdrive.IncomeDataParser;

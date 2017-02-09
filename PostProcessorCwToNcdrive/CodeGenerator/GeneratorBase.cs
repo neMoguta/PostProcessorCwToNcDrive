@@ -83,8 +83,9 @@ namespace PostProcessorCwToNcdrive.CodeGenerator
             _logger.Info(MethodBase.GetCurrentMethod().Name);
 
             SettingsBuffer.MillMoveType = MillMoveTypes.Drill;
+            var drillTypeParamIndex = 0;
 
-            switch (operationParams[0])
+            switch (operationParams[drillTypeParamIndex])
             {
                 case "CDRILL":
                     SettingsBuffer.DrillCommand =
