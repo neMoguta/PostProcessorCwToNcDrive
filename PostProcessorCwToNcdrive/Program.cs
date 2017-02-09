@@ -21,8 +21,10 @@ namespace PostProcessorCwToNcdrive
                 var options = new Options();
                 CommandLine.Parser.Default.ParseArguments(args, options);
 
-                Console.WriteLine(options.InputFile);          
+                Console.WriteLine(options.GetUsage());
+                Console.WriteLine();
 
+                Console.ReadKey();
                 _logger = LogManager.GetCurrentClassLogger();
 
                 _logger.Info("Program start");
