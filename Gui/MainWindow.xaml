@@ -1,0 +1,41 @@
+﻿<Window x:Class="Gui.MainWindow"
+        Name="MaWindowInstance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:gui="clr-namespace:Gui"
+        Title="PostProcessor" Height="379" Width="545"
+        >
+    <Window.Resources>
+        <gui:GeneratorViewModel x:Key="MyModel"></gui:GeneratorViewModel>
+    </Window.Resources>
+
+    <Grid>
+        <TabControl  Height="330" Margin="5,5,5,5" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <TabItem Header="Generator" HorizontalAlignment="Stretch" MinWidth="100">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0" DataContext="{StaticResource MyModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="5" >
+                        <TextBlock Text="Filter"  VerticalAlignment="Bottom"/>
+                        <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    </StackPanel>
+                    <DataGrid Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding Items}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="CamWorks" HorizontalAlignment="Stretch" MinWidth="100">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0"/>
+            </TabItem>
+            <TabItem Header="NcDrive" HorizontalAlignment="Stretch" MinWidth="100">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0" Height="294" VerticalAlignment="Top"/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
