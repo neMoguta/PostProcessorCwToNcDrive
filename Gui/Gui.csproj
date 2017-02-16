@@ -47,6 +47,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfApplicationFramework">
+      <HintPath>..\PostProcessorCwToNcdrive\lib\WpfApplicationFramework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -54,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GeneratorViewModel.cs" />
+    <Compile Include="Utils\DelegateCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,7 +72,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Person.cs" />
+    <Compile Include="CamProgramm.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

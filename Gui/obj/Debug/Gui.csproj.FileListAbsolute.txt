@@ -13,3 +13,5 @@ C:\Temp\gitTraining\Gui\obj\Debug\Gui.exe
 C:\Temp\gitTraining\Gui\obj\Debug\Gui.pdb
 C:\Temp\gitTraining\Gui\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Temp\gitTraining\Gui\obj\Debug\Gui_MarkupCompile.lref
+C:\Temp\gitTraining\Gui\bin\Debug\WpfApplicationFramework.dll
+C:\Temp\gitTraining\Gui\bin\Debug\WpfApplicationFramework.xml
