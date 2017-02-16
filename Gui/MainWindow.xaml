@@ -4,19 +4,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:gui="clr-namespace:Gui"
         Title="PostProcessor" Height="379" Width="774"
+        Icon="industrial-robot-5.png"
         >
     <Window.Resources>
         <gui:GeneratorViewModel x:Key="GeneratorModel"></gui:GeneratorViewModel>
+        <Image x:Key="MyImage" Source="coffee-cup-3.png"/>
     </Window.Resources>
+
 
     <Grid DataContext="{StaticResource GeneratorModel}" Background="#FFE5E5E5">
         <WrapPanel  Height="32" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Button Content="Open CamW" Margin="3"   FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Height="19" Width="80" Command="{Binding AddCamFileCommand}"/>
-            <Button Content="Save NcD" Margin="3"    FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Height="19" Width="80" Command="{Binding SaveFileCommand}" />
-            <Button Content="En/Ru" Margin="3,3,8,3" Width="45"  FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Right" Height="19" RenderTransformOrigin="0.933,0.514"/>
+            <Button Content="Open CamW" Margin="3"   FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="80" Command="{Binding AddCamFileCommand}"/>
+            <Button Content="Save NcD" Margin="3"    FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="80" Command="{Binding SaveFileCommand}" />
+            <Button Content="En/Ru" Margin="3,3,8,3" Width="45"  FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Right" Height="20" RenderTransformOrigin="0.933,0.514"/>
+            <Button Margin="3,3,8,3" Content="{StaticResource MyImage}" Width="30" Height="20" ToolTip="Help developer in his spare time night programming"/>
         </WrapPanel>
 
-        <TabControl Margin="0,3,0,0" HorizontalAlignment="Stretch">
+        <TabControl Margin="0,10,0,0" HorizontalAlignment="Stretch">
             <TabItem Header="CamWorks" HorizontalAlignment="Stretch" MinWidth="100">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
                     <TextBox VerticalScrollBarVisibility="Auto" IsReadOnly="True" Background="#FFF3F3F3" Text ="{Binding CamProgrammText}" RenderTransformOrigin="0.5,0.5">
@@ -63,6 +67,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
+            
         </TabControl>
 
 
