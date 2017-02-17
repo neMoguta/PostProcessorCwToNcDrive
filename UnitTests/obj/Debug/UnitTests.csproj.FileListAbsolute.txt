@@ -4,11 +4,11 @@ C:\Temp\gitTraining\UnitTests\bin\Debug\UnitTests.pdb
 C:\Temp\gitTraining\UnitTests\bin\Debug\PostProcessorCwToNcdrive.exe
 C:\Temp\gitTraining\UnitTests\bin\Debug\NLog.dll
 C:\Temp\gitTraining\UnitTests\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+C:\Temp\gitTraining\UnitTests\bin\Debug\CommandLine.dll
 C:\Temp\gitTraining\UnitTests\bin\Debug\PostProcessorCwToNcdrive.pdb
 C:\Temp\gitTraining\UnitTests\bin\Debug\NLog.xml
 C:\Temp\gitTraining\UnitTests\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml
+C:\Temp\gitTraining\UnitTests\bin\Debug\CommandLine.xml
 C:\Temp\gitTraining\UnitTests\obj\Debug\UnitTests.csprojResolveAssemblyReference.cache
 C:\Temp\gitTraining\UnitTests\obj\Debug\UnitTests.dll
 C:\Temp\gitTraining\UnitTests\obj\Debug\UnitTests.pdb
-C:\Temp\gitTraining\UnitTests\bin\Debug\CommandLine.dll
-C:\Temp\gitTraining\UnitTests\bin\Debug\CommandLine.xml

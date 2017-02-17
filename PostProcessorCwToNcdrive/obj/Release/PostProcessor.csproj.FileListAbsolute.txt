@@ -1,0 +1,13 @@
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\Nlog.config
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\PostProcessorCwToNcdrive.exe.config
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\PostProcessorCwToNcdrive.exe
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\PostProcessorCwToNcdrive.pdb
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\CommandLine.dll
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\KellermanSoftware.Compare-NET-Objects.dll
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\NLog.dll
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\CommandLine.xml
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\KellermanSoftware.Compare-NET-Objects.xml
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\NLog.xml
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\obj\Release\PostProcessorCwToNcdrive.exe
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\obj\Release\PostProcessorCwToNcdrive.pdb
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\obj\Release\PostProcessor.csprojResolveAssemblyReference.cache
