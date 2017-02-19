@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PostProcessor.IncomeDataParser
 {
@@ -10,7 +11,8 @@ namespace PostProcessor.IncomeDataParser
     {
         public IEnumerable<string> GetMillOperations(string source)
         {
-            return source.Split("OPFEATSTART".ToCharArray());
+            var separator = "OPFEATSTART";
+            return source.Split(new string[] { separator }, StringSplitOptions.None).Select(x => separator + x);
         }
 
         public Queue<Command> GetInstructions(IEnumerable<string> camWorksInstructions)
@@ -19,6 +21,7 @@ namespace PostProcessor.IncomeDataParser
 
             foreach (var line in camWorksInstructions)
             {
+                if (string.IsNullOrWhiteSpace(line)) continue;
                 var currentLine = line.Trim();
                 if (currentLine == "FINI") continue;
 
