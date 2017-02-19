@@ -1,7 +1,6 @@
-﻿
-using KellermanSoftware.CompareNetObjects;
+﻿using KellermanSoftware.CompareNetObjects;
 
-namespace PostProcessorCwToNcdrive.CodeGenerator
+namespace PostProcessor.CodeGenerator
 {
     public class Settings
     {

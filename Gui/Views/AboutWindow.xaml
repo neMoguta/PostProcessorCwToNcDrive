@@ -10,7 +10,7 @@
     <Grid Background="#FFF3F3F3" DataContext="{StaticResource GeneratorModel}">
         <FlowDocumentScrollViewer VerticalScrollBarVisibility="Disabled" FontFamily="Italic">
             <FlowDocument FontSize="14"  >
-                <Paragraph>Post processor for integration Cam Works generated tollpath programm with NcDrive.
+                <Paragraph>Post processor for integration Cam Works generated tollpath programm with NcDrive one.
                 </Paragraph>
                 <Paragraph>
                     Tested on CNC Bf20 Vario.
@@ -25,7 +25,7 @@
                     <Hyperlink Command="{Binding NavigateCommand}">
                         cup of coffe
                     </Hyperlink>
-                    for developer.
+                    for developer
                 </Paragraph>
             </FlowDocument>
         </FlowDocumentScrollViewer>

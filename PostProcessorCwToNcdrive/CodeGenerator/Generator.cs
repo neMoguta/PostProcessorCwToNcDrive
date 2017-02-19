@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using NLog;
-using PostProcessorCwToNcdrive.IncomeDataParser;
+using PostProcessor.IncomeDataParser;
 
-namespace PostProcessorCwToNcdrive.CodeGenerator
+namespace PostProcessor.CodeGenerator
 {
     public class Generator : GeneratorBase
     {

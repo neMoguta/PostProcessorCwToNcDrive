@@ -1,4 +1,4 @@
-﻿namespace PostProcessorCwToNcdrive.CodeGenerator
+﻿namespace PostProcessor.CodeGenerator
 {
     public static class CamOperations
     {

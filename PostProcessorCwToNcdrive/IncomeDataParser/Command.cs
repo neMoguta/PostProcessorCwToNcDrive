@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PostProcessorCwToNcdrive.IncomeDataParser
+﻿namespace PostProcessor.IncomeDataParser
 {
     public class Command
     {

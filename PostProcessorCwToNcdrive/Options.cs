@@ -2,7 +2,7 @@
 using System.Text;
 using CommandLine;
 
-namespace PostProcessorCwToNcdrive
+namespace PostProcessor
 {
     public class Options
     {

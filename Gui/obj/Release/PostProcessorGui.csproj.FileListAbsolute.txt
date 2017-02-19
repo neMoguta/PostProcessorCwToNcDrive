@@ -19,3 +19,16 @@ C:\Temp\gitTraining\Gui\obj\Release\PostProcessorGui.g.resources
 C:\Temp\gitTraining\Gui\obj\Release\PostProcessorGui.Properties.Resources.resources
 C:\Temp\gitTraining\Gui\obj\Release\PostProcessorGui.exe
 C:\Temp\gitTraining\Gui\obj\Release\PostProcessorGui.pdb
+C:\Temp\gitTraining\Gui\bin\Release\Nlog.config
+C:\Temp\gitTraining\Gui\bin\Release\NLog.dll
+C:\Temp\gitTraining\Gui\bin\Release\KellermanSoftware.Compare-NET-Objects.dll
+C:\Temp\gitTraining\Gui\bin\Release\CommandLine.dll
+C:\Temp\gitTraining\Gui\bin\Release\NLog.xml
+C:\Temp\gitTraining\Gui\bin\Release\KellermanSoftware.Compare-NET-Objects.xml
+C:\Temp\gitTraining\Gui\bin\Release\CommandLine.xml
+C:\Temp\gitTraining\Gui\bin\Release\PostProcessor.exe
+C:\Temp\gitTraining\Gui\bin\Release\PostProcessor.pdb
+C:\Temp\gitTraining\bin\PostProcessorGui.exe.config
+C:\Temp\gitTraining\bin\Nlog.config
+C:\Temp\gitTraining\bin\PostProcessorGui.exe
+C:\Temp\gitTraining\bin\PostProcessorGui.pdb

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using NLog;
 
-namespace PostProcessorCwToNcdrive.CodeGenerator
+namespace PostProcessor.CodeGenerator
 {
     public class GeneratorBase
     {
