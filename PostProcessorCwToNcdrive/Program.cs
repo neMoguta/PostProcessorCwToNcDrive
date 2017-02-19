@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using NLog;
 using PostProcessor.CodeGenerator;
-using PostProcessorCwToNcdrive.IncomeDataParser;
+using PostProcessor.IncomeDataParser;
 
 namespace PostProcessor
 {
@@ -22,35 +22,22 @@ namespace PostProcessor
                 var options = new Options();
                 CommandLine.Parser.Default.ParseArguments(args, options);
 
-                Console.WriteLine(options.InputFile);
-                Console.WriteLine();
-
-                Console.ReadKey();
                 _logger = LogManager.GetCurrentClassLogger();
-
                 _logger.Info("Program start");
 
-                //var testFilePath = Environment.CurrentDirectory + @"\UniSource.clt";
-
-                IEnumerable<string> contents = File.ReadAllLines(options.InputFile,
-                    Encoding.Default);
+                IEnumerable<string> contents = File.ReadAllLines(options.InputFile, Encoding.Default);
 
                 Parser parser = new Parser();
-                var res = parser.GetInstructions(contents);
-
-                File.WriteAllText(@"C:\Temp\Data\rawResult.txt",
-                    res.Select(line => line.Name + " " + line.Settings.Aggregate((p1, p2) => p1 + ";" + p2))
-                        .Aggregate((l1, l2) => l1 + Environment.NewLine + l2));
+                var instructions = parser.GetInstructions(contents);
 
                 var gen = new Generator();
-
-                var fin = gen.GenerateMillProgramm(res);
+                var result = gen.GenerateMillProgramm(instructions);
 
                 File.WriteAllText(Path.Combine(
                     Environment.CurrentDirectory, @"GCode.txt"),
-                    fin.Aggregate((x, y) => x + Environment.NewLine + y), Encoding.Default);
+                    result.Aggregate((x, y) => x + Environment.NewLine + y), Encoding.Default);
 
-                _logger.Info("Program stop"+Environment.NewLine);
+                _logger.Info("Program stop" + Environment.NewLine);
             }
             catch (Exception ex)
             {

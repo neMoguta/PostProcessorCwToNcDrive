@@ -7,8 +7,10 @@ using System.Windows.Navigation;
 using PostProcessorGui.Utils;
 using PostProcessorGui.Views;
 using Microsoft.Win32;
+using PostProcessorGui.SettingsController;
+using PostProcessorGui.SettingsController;
 
-namespace PostProcessorGui.ViewModels
+namespace PostProcessorGui.SettingsController
 {
     public class GeneratorViewModel : DependencyObject
     {

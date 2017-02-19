@@ -2,7 +2,7 @@
         Name="MaWindowInstance"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:viewModels="clr-namespace:PostProcessorGui.ViewModels"
+        xmlns:viewModels="clr-namespace:PostProcessorGui.SettingsController"
         Title="PostProcessor CamWorks --> NcDrive v1.0" Height="479" Width="774"
         Icon="../Resources/industrial-robot-5.png">
     <Window.Resources>

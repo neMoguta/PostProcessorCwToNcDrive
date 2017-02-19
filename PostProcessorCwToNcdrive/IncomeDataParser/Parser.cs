@@ -3,13 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using PostProcessor.IncomeDataParser;
 
-namespace PostProcessorCwToNcdrive.IncomeDataParser
+namespace PostProcessor.IncomeDataParser
 {
     public class Parser
     {
+        public IEnumerable<string> GetMillOperations(string source)
+        {
+            return source.Split("OPFEATSTART".ToCharArray());
+        }
+
         public Queue<Command> GetInstructions(IEnumerable<string> camWorksInstructions)
         {
             var instructions = new Queue<Command>();

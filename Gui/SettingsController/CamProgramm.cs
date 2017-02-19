@@ -1,4 +1,4 @@
-﻿namespace PostProcessorGui.ViewModels
+﻿namespace PostProcessorGui.SettingsController
 {
     class CamProgramm
     {

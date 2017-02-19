@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PostProcessor.CodeGenerator;
-using PostProcessorCwToNcdrive.IncomeDataParser;
+using PostProcessor.IncomeDataParser;
 
 namespace UnitTests
 {

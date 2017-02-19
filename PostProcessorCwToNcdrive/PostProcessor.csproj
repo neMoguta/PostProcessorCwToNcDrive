@@ -58,6 +58,7 @@
     <Compile Include="CodeGenerator\Generator.cs" />
     <Compile Include="CodeGenerator\MillOperations.cs" />
     <Compile Include="CodeGenerator\Settings.cs" />
+    <Compile Include="IncomeDataParser\MillOperation.cs" />
     <Compile Include="IncomeDataParser\Parser.cs" />
     <Compile Include="IncomeDataParser\Command.cs" />
     <Compile Include="Options.cs" />
