@@ -9,10 +9,19 @@ namespace PostProcessor.IncomeDataParser
 {
     public class Parser
     {
-        public IEnumerable<string> GetMillOperations(string source)
+        public IEnumerable<MillOperation> GetMillOperations(string source)
         {
             var separator = "OPFEATSTART";
-            return source.Split(new string[] { separator }, StringSplitOptions.None).Select(x => separator + x);
+
+            return
+                source.Split(new string[] { separator }, StringSplitOptions.None).
+                Select(x => new MillOperation { Name = GetOperationName(x), Data = separator + x });
+        }
+
+
+        private string GetOperationName(string operationData)
+        {
+            return "";
         }
 
         public Queue<Command> GetInstructions(IEnumerable<string> camWorksInstructions)

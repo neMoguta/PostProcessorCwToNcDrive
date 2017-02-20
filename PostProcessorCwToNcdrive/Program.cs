@@ -36,12 +36,12 @@ namespace PostProcessor
                 var buffer = new Queue<Command>();
                 blocks.ToList().ForEach(b =>
                 {
-                    var blockLines = b.Split(new[] {"\r\n"}, StringSplitOptions.None);
+                    var blockLines = b.Data.Split(new[] {"\r\n"}, StringSplitOptions.None);
 
                     var blockInstructions = parser.GetInstructions(blockLines);
-                    foreach (var line in blockInstructions)
+                    foreach (var instruction in blockInstructions)
                     {
-                        buffer.Enqueue(line);
+                        buffer.Enqueue(instruction);
                     }
                 });
 
