@@ -32,3 +32,4 @@ C:\Temp\gitTraining\bin\PostProcessorGui.exe.config
 C:\Temp\gitTraining\bin\Nlog.config
 C:\Temp\gitTraining\bin\PostProcessorGui.exe
 C:\Temp\gitTraining\bin\PostProcessorGui.pdb
+C:\Temp\gitTraining\Gui\obj\Release\App.baml

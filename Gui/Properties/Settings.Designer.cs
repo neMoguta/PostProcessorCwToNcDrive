@@ -22,5 +22,53 @@ namespace PostProcessorGui.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SettingsEnableHotkeyGeneration {
+            get {
+                return ((bool)(this["SettingsEnableHotkeyGeneration"]));
+            }
+            set {
+                this["SettingsEnableHotkeyGeneration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SettingsAddM00AtTheEnd {
+            get {
+                return ((bool)(this["SettingsAddM00AtTheEnd"]));
+            }
+            set {
+                this["SettingsAddM00AtTheEnd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SettingsAddCustomAtTheEnd {
+            get {
+                return ((bool)(this["SettingsAddCustomAtTheEnd"]));
+            }
+            set {
+                this["SettingsAddCustomAtTheEnd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SettingsCustomCommands {
+            get {
+                return ((string)(this["SettingsCustomCommands"]));
+            }
+            set {
+                this["SettingsCustomCommands"] = value;
+            }
+        }
     }
 }

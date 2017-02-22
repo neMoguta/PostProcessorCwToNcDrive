@@ -160,6 +160,9 @@ namespace PostProcessorGui.ViewModels
             return resultProgramm;
         }
 
+
+
+
         private RelayCommand _aboutWindowOpenCommand;
         public RelayCommand AboutWindowDelegateCommand
         {

@@ -1,8 +1,11 @@
 ﻿<Application x:Class="PostProcessorGui.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModel="clr-namespace:PostProcessorGui.ViewModels"
              StartupUri="Views/MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+
+        <Application.Resources>
+            <viewModel:SettingsViewModel x:Key="MainViewModel" />
+        </Application.Resources>
+
 </Application>

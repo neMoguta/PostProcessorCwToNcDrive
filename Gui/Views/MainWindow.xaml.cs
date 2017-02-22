@@ -10,6 +10,7 @@ namespace PostProcessorGui.Views
         public MainWindow()
         {
             InitializeComponent();
+
             //Loaded += MainWindowLoaded;
         }
 
