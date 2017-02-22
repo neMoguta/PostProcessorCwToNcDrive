@@ -89,11 +89,11 @@ namespace PostProcessor.CodeGenerator
             {
                 case "CDRILL":
                     SettingsBuffer.DrillCommand =
-                        " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F500 H3";
+                        " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] +" F"+ operationParams[7] +" H3";
                     break;
                 case "DRILL":
                     SettingsBuffer.DrillCommand =
-                        " G84" + " Z-" + operationParams[2] + " D100" + operationParams[2] + " F500 H3";
+                        " G84" + " Z-" + operationParams[2] + " D100" + operationParams[2] +" F"+ operationParams[7] +" H3";
                     break;
                 default:
                     _logger.Debug("Operation {0} was not buffered", operationParams[0]);

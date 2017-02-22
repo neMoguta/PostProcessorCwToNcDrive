@@ -88,7 +88,7 @@
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\GeneratorViewModel.cs" />
-    <Compile Include="Utils\DelegateCommand.cs" />
+    <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="Views\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -114,7 +114,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SettingsController\CamProgramm.cs" />
+    <Compile Include="Controller\CamProgramm.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

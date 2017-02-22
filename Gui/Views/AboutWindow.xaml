@@ -1,16 +1,16 @@
 ﻿<Window x:Class="PostProcessorGui.Views.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:viewModels="clr-namespace:PostProcessorGui.SettingsController"
-        Title="AboutWindow" Height="275" Width="389.213" WindowStartupLocation="CenterOwner">
+        xmlns:viewModels1="clr-namespace:PostProcessorGui.ViewModels"
+        Title="About" Height="275" Width="389.213" WindowStartupLocation="CenterOwner">
     <Window.Resources>
-        <viewModels:GeneratorViewModel x:Key="GeneratorModel"></viewModels:GeneratorViewModel>
+        <viewModels1:GeneratorViewModel x:Key="GeneratorModel"></viewModels1:GeneratorViewModel>
     </Window.Resources>
 
     <Grid Background="#FFF3F3F3" DataContext="{StaticResource GeneratorModel}">
         <FlowDocumentScrollViewer VerticalScrollBarVisibility="Disabled" FontFamily="Italic">
             <FlowDocument FontSize="14"  >
-                <Paragraph>Post processor for integration Cam Works generated tollpath programm with NcDrive one.
+                <Paragraph>Post processor for integration Cam Works generated tollpath programm with NcDrive.
                 </Paragraph>
                 <Paragraph>
                     Tested on CNC Bf20 Vario.

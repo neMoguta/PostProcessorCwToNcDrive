@@ -30,7 +30,6 @@ namespace PostProcessor
                 var data = File.ReadAllText(options.InputFile, Encoding.Default);
 
                 Parser parser = new Parser();
-
                 var blocks = parser.GetMillOperations(data);
 
                 var buffer = new Queue<Command>();

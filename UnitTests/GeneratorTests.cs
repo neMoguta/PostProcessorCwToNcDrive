@@ -230,7 +230,6 @@ namespace UnitTests
                 var generatedLine = millProgramm.Dequeue();
                 Assert.IsTrue(etalonLine.Equals(generatedLine), "Lines not equial. Etalon:[{0}], generated:[{1}]", etalonLine, generatedLine);
             }
-
         }
     }
 }

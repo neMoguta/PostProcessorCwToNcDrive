@@ -11,17 +11,19 @@ namespace PostProcessor.IncomeDataParser
     {
         public IEnumerable<MillOperation> GetMillOperations(string source)
         {
-            var separator = "OPFEATSTART";
+            var separator = @"OPFEATSTART/";
 
             return
                 source.Split(new string[] { separator }, StringSplitOptions.None).
-                Select(x => new MillOperation { Name = GetOperationName(x), Data = separator + x });
+                Where(op => op.Contains("OPFEATEND")).
+                Select(op => new MillOperation { Name = GetOperationName(op), Data = separator + op });
         }
-
 
         private string GetOperationName(string operationData)
         {
-            return "";
+            var operationLines = operationData.Split(new[] {"\r\n"}, StringSplitOptions.None);
+
+            return operationLines.Length > 0 ? operationLines[0] : "OperationNameWasNotExtracted";
         }
 
         public Queue<Command> GetInstructions(IEnumerable<string> camWorksInstructions)

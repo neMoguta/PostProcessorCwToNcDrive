@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Navigation;
+using Microsoft.Win32;
+using PostProcessor.CodeGenerator;
+using PostProcessor.IncomeDataParser;
+using PostProcessorGui.Controller;
 using PostProcessorGui.Utils;
 using PostProcessorGui.Views;
-using Microsoft.Win32;
-using PostProcessorGui.SettingsController;
-using PostProcessorGui.SettingsController;
 
-namespace PostProcessorGui.SettingsController
+namespace PostProcessorGui.ViewModels
 {
     public class GeneratorViewModel : DependencyObject
     {
@@ -32,7 +35,15 @@ namespace PostProcessorGui.SettingsController
 
         // Using a DependencyProperty as the backing store for CamProgrammText.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CamProgrammTextProperty =
-            DependencyProperty.Register("CamProgrammText", typeof(string), typeof(GeneratorViewModel), new PropertyMetadata(""));   
+            DependencyProperty.Register("CamProgrammText", typeof(string), typeof(GeneratorViewModel), new PropertyMetadata("", CamProgrammLoaded));
+
+        private static void CamProgrammLoaded(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var generatorViewModel = d as GeneratorViewModel;
+            if (generatorViewModel == null) return;
+
+            // reserved
+        }
 
         public string TextFilter
         {
@@ -65,36 +76,32 @@ namespace PostProcessorGui.SettingsController
 
         public GeneratorViewModel()
         {
-            Items = CollectionViewSource.GetDefaultView(CamProgramm.GetPersons());
+            Items = CollectionViewSource.GetDefaultView(CamProgramm.GetOperations(CamProgrammText));
             Items.Filter = ItemsFilter;
         }
-
         /// <summary>
         ///  Do not filter if true
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        private bool ItemsFilter(object obj)
+        public bool ItemsFilter(object obj)
         {
-            var currentPerson = obj as CamProgramm;
+            var operation = obj as CamProgramm;
 
-            if (currentPerson == null)
+            if (operation == null)
                 return false;
 
             if (string.IsNullOrWhiteSpace(TextFilter))
                 return true;
 
-            return currentPerson.OperationName.ToLower().Contains(TextFilter.ToLower()) ||
-                currentPerson.OperationParams.ToLower().Contains(TextFilter.ToLower());
+            return operation.OperationName.ToLower().Contains(TextFilter.ToLower());
         }
 
         private RelayCommand _saveFileCommand;
-
         public RelayCommand SaveFileCommand
         {
             get { return _saveFileCommand ?? (_saveFileCommand = new RelayCommand(SaveFile)); }
         }
-
         private void SaveFile(object obj)
         {
             var dialog = new SaveFileDialog
@@ -108,17 +115,60 @@ namespace PostProcessorGui.SettingsController
             }
         }
 
-        private RelayCommand _aboutWindowOpenCommand;
+        public bool NcDriveSelected
+        {
+            get { return (bool)GetValue(SelectedProperty); }
+            set { SetValue(SelectedProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for Selected.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedProperty =
+            DependencyProperty.Register("NcDriveSelected", typeof(bool), typeof(GeneratorViewModel), new PropertyMetadata(false, TabNcDriveOpen));
+
+        private static void TabNcDriveOpen(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var generatorViewModel = d as GeneratorViewModel;
+            if (generatorViewModel == null) return;
+
+            generatorViewModel.NcDriveProgrammText = GenerateNcDriveProgram(generatorViewModel);
+        }
+
+        private static string GenerateNcDriveProgram(GeneratorViewModel generatorViewModel)
+        {
+            var buffer = new Queue<Command>();
+
+            foreach (var item in generatorViewModel.Items)
+            {
+                var camData = item as CamProgramm;
+                if (camData == null)
+                    throw new ArgumentNullException(@"CamProgramm is null");
+                if(!camData.IsOperationOn)
+                    continue;
+
+                var blockLines = camData.OperationData.Split(new[] {"\r\n"}, StringSplitOptions.None);
+
+                var blockInstructions = new Parser().GetInstructions(blockLines);
+                foreach (var instruction in blockInstructions)
+                {
+                    buffer.Enqueue(instruction);
+                }
+            }
+
+            var gen = new Generator();
+            var result = gen.GenerateMillProgramm(buffer);
+            var resultProgramm = result.Aggregate((x, y) => x + Environment.NewLine + y);
+            return resultProgramm;
+        }
+
+        private RelayCommand _aboutWindowOpenCommand;
         public RelayCommand AboutWindowDelegateCommand
         {
             get { return _aboutWindowOpenCommand ?? (_aboutWindowOpenCommand = new RelayCommand(AboutWindowOpen)); }
         }
-
         private void AboutWindowOpen(object obj)
         {
             AboutWindow aboutWindow = new AboutWindow();
-            aboutWindow.Owner = Application.Current.MainWindow; 
+            aboutWindow.Owner = Application.Current.MainWindow;
             aboutWindow.ShowDialog();
         }
 
@@ -130,7 +180,6 @@ namespace PostProcessorGui.SettingsController
                 return _settingsCommand ?? (_settingsCommand = new RelayCommand(OpenSettings));
             }
         }
-
         private void OpenSettings(object obj)
         {
             SettingsWindow settingsWindow = new SettingsWindow();
@@ -146,12 +195,11 @@ namespace PostProcessorGui.SettingsController
                 return _navigateCommand ?? (_navigateCommand = new RelayCommand(Navigate));
             }
         }
-
         private void Navigate(object obj)
         {
-            System.Diagnostics.Process.Start(new Uri("http://www.google.com").ToString());
+            System.Diagnostics.Process.Start(
+                new Uri(@"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4W7P2W2ZQ4RE4").ToString());
         }
-
 
         private RelayCommand _addCamFileCommand;
         public RelayCommand AddCamFileCommand
@@ -161,7 +209,6 @@ namespace PostProcessorGui.SettingsController
                 return _addCamFileCommand ?? (_addCamFileCommand = new RelayCommand(AddCamFile));
             }
         }
-
         private void AddCamFile(object arg)
         {
             var dialog = new OpenFileDialog
@@ -180,6 +227,8 @@ namespace PostProcessorGui.SettingsController
                     CamProgrammText = sr.ReadToEnd();
                 }
             }
+
+            Items = CollectionViewSource.GetDefaultView(CamProgramm.GetOperations(CamProgrammText));
         }
     }
 }
