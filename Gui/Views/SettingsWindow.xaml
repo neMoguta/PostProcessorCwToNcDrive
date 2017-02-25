@@ -28,11 +28,7 @@
                 <CheckBox.ToolTip>Add "M00" at the end of every operation</CheckBox.ToolTip>
             </CheckBox>
         </StackPanel>
-        <StackPanel Margin="5" Grid.Row="0">
-            <CheckBox Content="Enable hotkey fast generation option" Margin="0,0,0,0" IsChecked="{Binding AutoGenHotkeyOn}">
-                <CheckBox.ToolTip>Read last .clt file and overwrite saved NcDrive file. Ctrl + s</CheckBox.ToolTip>
-            </CheckBox>
-        </StackPanel>
+        <StackPanel Margin="5" Grid.Row="0"/>
         <StackPanel Margin="5" Grid.Row="2" Grid.Column="0">
             <CheckBox Content="Add custom commands at every operation end" Margin="0,0,0,0" IsChecked="{Binding AddCustomCommandAtOperationEnd}">
                 <CheckBox.ToolTip>

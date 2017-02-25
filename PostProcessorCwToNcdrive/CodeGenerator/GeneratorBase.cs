@@ -30,15 +30,19 @@ namespace PostProcessor.CodeGenerator
             ncDriveProgram.Enqueue("(Start: " + operationHeader + ")");
         }
 
-        public void EnqueueOperationFooter(Queue<string> ncDriveProgram,int? currentLine, string operationName)
+        public void EnqueueOperationFooter(Queue<string> ncDriveProgram, int? currentLine, string operationName, string additionalCommands = null, bool customOn=false, bool m00On = true)
         {
             _logger.Info(operationName);
 
+            if (additionalCommands != null && customOn)
+                ncDriveProgram.Enqueue(additionalCommands);
+
             ncDriveProgram.Enqueue("(End: " + operationName + ")");
-            ncDriveProgram.Enqueue("N"+currentLine +" M00");
+            if(m00On)
+                ncDriveProgram.Enqueue("N" + currentLine + " M00");
         }
 
-        public void EnqueueSetFeedRate(Queue<string> ncDriveProgram, int? currentLine, string feedRate)
+        public void EnqueueSetFeedRate(Queue<string> ncDriveProgram, int? currentLine, string feedRate, string mock=null)
         {
             ncDriveProgram.Enqueue("N" + currentLine + " F" + feedRate);
         }
@@ -89,11 +93,11 @@ namespace PostProcessor.CodeGenerator
             {
                 case "CDRILL":
                     SettingsBuffer.DrillCommand =
-                        " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] +" F"+ operationParams[7] +" H3";
+                        " G84" + " Z-" + operationParams[1] + " D100" + operationParams[1] + " F" + operationParams[7] + " H3";
                     break;
                 case "DRILL":
                     SettingsBuffer.DrillCommand =
-                        " G84" + " Z-" + operationParams[2] + " D100" + operationParams[2] +" F"+ operationParams[7] +" H3";
+                        " G84" + " Z-" + operationParams[2] + " D100" + operationParams[2] + " F" + operationParams[7] + " H3";
                     break;
                 default:
                     _logger.Debug("Operation {0} was not buffered", operationParams[0]);

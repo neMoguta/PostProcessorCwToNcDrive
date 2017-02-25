@@ -9,6 +9,18 @@ namespace PostProcessor.CodeGenerator
 {
     public class Generator : GeneratorBase
     {
+        public Generator(bool addM00AtOperationEnd, bool addCustomOn, string additionalOperationCommands = null)
+            : base()
+        {
+            _addM00AtOperationEnd = addM00AtOperationEnd;
+            _addCustomOn = addCustomOn;
+            _additionalOperationCommands = additionalOperationCommands;
+        }
+
+        private readonly string _additionalOperationCommands;
+        private readonly bool _addM00AtOperationEnd;
+        private readonly bool _addCustomOn;
+
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         public Queue<string> GenerateMillProgramm(Queue<Command> instructionsSource)
         {
@@ -32,7 +44,13 @@ namespace PostProcessor.CodeGenerator
                         break;
 
                     case CamOperations.OperationEnd:
-                        EnqueueOperationFooter(millProgramm, currentline, operationName: operationSettings[0]);
+                        EnqueueOperationFooter(millProgramm,
+                            currentline,
+                            operationName: operationSettings[0],
+                            additionalCommands: _additionalOperationCommands,
+                            customOn:_addCustomOn,
+                            m00On:_addM00AtOperationEnd
+                            );
                         currentline++;
                         break;
 

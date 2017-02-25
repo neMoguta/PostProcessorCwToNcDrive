@@ -25,21 +25,21 @@ namespace UnitTests
             MillProgramAssert(program, new Queue<string>(new[] { expextedLine }));
         }
 
-        protected Queue<string> GenerateTestProgram(Action<Queue<string>, int?, string> func, int? line, string header)
+        protected Queue<string> GenerateTestProgram(Action<Queue<string>, int?, string, string> func, int? line, string header, string additional = null)
         {
             var result = new Queue<string>();
-            func(result, line, header);
+            func(result, line, header, additional);
             return result;
         }
 
         protected Queue<string> GenerateTestProgram(Action<Queue<string>, int?> func, int lineNumber)
         {
-            return GenerateTestProgram((program, line, name) => func(program, line), lineNumber, null);
+            return GenerateTestProgram((program, line, name, x) => func(program, line), lineNumber, null);
         }
 
         protected Queue<string> GenerateTestProgram(Action<Queue<string>, string> func, string header)
         {
-            return GenerateTestProgram((program, line, name) => func(program, name), null, header);
+            return GenerateTestProgram((program, line, name, x) => func(program, name), null, header);
         }
     }
 }

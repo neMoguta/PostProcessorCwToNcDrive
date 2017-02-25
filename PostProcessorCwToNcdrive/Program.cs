@@ -46,7 +46,7 @@ namespace PostProcessor
 
                 var instructions = buffer;
 
-                var gen = new Generator();
+                var gen = new Generator(false,false,"");
                 var result = gen.GenerateMillProgramm(instructions);
 
                 File.WriteAllText(Path.Combine(

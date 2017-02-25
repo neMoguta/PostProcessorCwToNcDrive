@@ -142,10 +142,10 @@ namespace PostProcessorGui.ViewModels
                 var camData = item as CamProgramm;
                 if (camData == null)
                     throw new ArgumentNullException(@"CamProgramm is null");
-                if(!camData.IsOperationOn)
+                if (!camData.IsOperationOn)
                     continue;
 
-                var blockLines = camData.OperationData.Split(new[] {"\r\n"}, StringSplitOptions.None);
+                var blockLines = camData.OperationData.Split(new[] { "\r\n" }, StringSplitOptions.None);
 
                 var blockInstructions = new Parser().GetInstructions(blockLines);
                 foreach (var instruction in blockInstructions)
@@ -154,14 +154,15 @@ namespace PostProcessorGui.ViewModels
                 }
             }
 
-            var gen = new Generator();
+            var gen = new Generator(
+                Properties.Settings.Default.SettingsAddM00AtTheEnd,
+                Properties.Settings.Default.SettingsAddCustomAtTheEnd,
+                Properties.Settings.Default.SettingsCustomCommands);
+
             var result = gen.GenerateMillProgramm(buffer);
             var resultProgramm = result.Aggregate((x, y) => x + Environment.NewLine + y);
             return resultProgramm;
         }
-
-
-
 
         private RelayCommand _aboutWindowOpenCommand;
         public RelayCommand AboutWindowDelegateCommand
@@ -188,6 +189,22 @@ namespace PostProcessorGui.ViewModels
             SettingsWindow settingsWindow = new SettingsWindow();
             settingsWindow.Owner = Application.Current.MainWindow;
             settingsWindow.ShowDialog();
+        }
+
+        private RelayCommand _navigateToYTubeCommand;
+
+        public RelayCommand NavigateToYTubeCommand
+        {
+            get
+            {
+                return _navigateToYTubeCommand ?? (_navigateToYTubeCommand = new RelayCommand(NavigateToYTube));
+            }
+        }
+
+        private void NavigateToYTube(object obj)
+        {
+            System.Diagnostics.Process.Start(
+                new Uri(@"https://youtu.be/YgNbZjzj8Jc").ToString());
         }
 
         private RelayCommand _navigateCommand;

@@ -5,7 +5,6 @@ C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\NLog.dll
 C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\CommandLine.xml
 C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\KellermanSoftware.Compare-NET-Objects.xml
 C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\NLog.xml
-C:\Temp\gitTraining\PostProcessorCwToNcdrive\obj\Release\PostProcessor.csprojResolveAssemblyReference.cache
 C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\PostProcessor.exe.config
 C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\PostProcessor.exe
 C:\Temp\gitTraining\PostProcessorCwToNcdrive\bin\Release\PostProcessor.pdb

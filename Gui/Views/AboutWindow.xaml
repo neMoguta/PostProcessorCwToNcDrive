@@ -12,11 +12,13 @@
             <FlowDocument FontSize="14"  >
                 <Paragraph>Post processor for integration Cam Works generated tollpath programm with NcDrive.
                 </Paragraph>
-                <Paragraph>
-                    Tested on CNC Bf20 Vario.
-                    </Paragraph>
+                <Paragraph FontFamily="Global Monospace" >
+                    <Hyperlink Command="{Binding NavigateToYTubeCommand}">
+                        Tested on CNC Bf20 Vario
+                    </Hyperlink>
+                </Paragraph>
                 <Paragraph/>
-                    <Paragraph>
+                <Paragraph>
                     Programm free for any usage.
                 </Paragraph>
                 <Paragraph/>
