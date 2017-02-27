@@ -14,7 +14,7 @@ namespace PostProcessor.IncomeDataParser
             var separator = @"OPFEATSTART/";
 
             return
-                source.Split(new string[] { separator }, StringSplitOptions.None).
+                source.Split(new[] { separator }, StringSplitOptions.None).
                 Where(op => op.Contains("OPFEATEND")).
                 Select(op => new MillOperation { Name = GetOperationName(op), Data = separator + op });
         }

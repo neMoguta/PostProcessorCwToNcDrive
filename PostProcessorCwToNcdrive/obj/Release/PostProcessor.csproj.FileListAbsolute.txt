@@ -14,3 +14,4 @@ C:\Temp\gitTraining\bin\PostProcessor.exe
 C:\Temp\gitTraining\bin\PostProcessor.pdb
 C:\Temp\gitTraining\PostProcessorCwToNcdrive\obj\Release\PostProcessor.exe
 C:\Temp\gitTraining\PostProcessorCwToNcdrive\obj\Release\PostProcessor.pdb
+C:\Temp\gitTraining\PostProcessorCwToNcdrive\obj\Release\PostProcessor.csprojResolveAssemblyReference.cache

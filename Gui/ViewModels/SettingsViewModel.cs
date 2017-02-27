@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using PostProcessorGui.Utils;
 
 namespace PostProcessorGui.ViewModels
@@ -88,7 +83,6 @@ namespace PostProcessorGui.ViewModels
             var settings = (d as SettingsViewModel);
             if (settings == null) return;
             Properties.Settings.Default.SettingsCustomCommands = settings.CustomCommands;
-            
         }
 
         private RelayCommand _windowClosingCommand;

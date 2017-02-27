@@ -29,15 +29,18 @@ namespace UnitTests
         [TestMethod]
         public void SetFeedRatePositive()
         {
-            var program = GenerateTestProgram(new GeneratorBase().EnqueueSetFeedRate, 10, "800");
+            var program = new Queue<string>();
+            new GeneratorBase().EnqueueSetFeedRate(program, 10, "800");
 
             MillProgramAssert(program, expextedLine: "N10 F800");
         }
 
+
         [TestMethod]
         public void EnqueueOperationHeader()
         {
-            var program = GenerateTestProgram(new GeneratorBase().EnqueueOperationHeader, "Header");
+            var program = new Queue<string>();
+            new GeneratorBase().EnqueueOperationHeader(program, "Header");
 
             MillProgramAssert(program, expextedLine: "(Start: Header)");
         }
@@ -45,7 +48,8 @@ namespace UnitTests
         [TestMethod]
         public void EnqueueRapidMoveOn()
         {
-            var program = GenerateTestProgram(new GeneratorBase().EnqueueRapidMoveOn, 50);
+            var program = new Queue<string>();
+            new GeneratorBase().EnqueueRapidMoveOn(program, 50);
 
             MillProgramAssert(program, "N50 G00");
         }
@@ -53,14 +57,14 @@ namespace UnitTests
         [TestMethod]
         public void EnqueueOperationFooter()
         {
-            var program = GenerateTestProgram(new GeneratorBase().EnqueueOperationFooter, 0, "Footer");
+            var program = new Queue<string>();
+            new GeneratorBase().EnqueueOperationFooter(program, 0, "Footer");
 
             MillProgramAssert(program, expectedLines: 2, expextedProgramm: new Queue<string>(new[]
             {
                 "(End: Footer)", 
                 "N0 M00"
             }));
-
         }
 
         [TestMethod]
@@ -80,7 +84,7 @@ namespace UnitTests
                 var etalonCommandSettings = command.Value;
 
                 var generator = new GeneratorBase();
-                generator.SetCycleDrillSettings(new[] { commandName, "OpParam", "OpParam2" });
+                generator.SetCycleDrillSettings(new[] { commandName, "OpParam", "OpParam2", null, null, null, null, "500" });
 
                 return generator.SettingsBuffer.NotEqual(etalonCommandSettings);
             }).ToList();
@@ -215,12 +219,12 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void GenerateTestProgram()
+        public void GenerateTestProgramTest()
         {
             Parser parser = new Parser();
             var camProgramm = parser.GetInstructions(File.ReadAllLines(@"C:\Temp\Example\UniSource.clt"));
 
-            var generator = new Generator();
+            var generator = new Generator(true, false);
 
             var millProgramm = generator.GenerateMillProgramm(camProgramm);
             var etalon = File.ReadAllLines(@"C:\Temp\Example\GCode.txt");

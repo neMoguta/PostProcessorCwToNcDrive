@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using Microsoft.Win32;
@@ -107,7 +106,7 @@ namespace PostProcessorGui.ViewModels
             var dialog = new SaveFileDialog
             {
                 Filter = "NcDrive programm (*.txt)|*.txt|All files (*.*)|*.*",
-                InitialDirectory = "c:\\temp"
+                InitialDirectory = "c:\\"
             };
             if (dialog.ShowDialog() == true)
             {
@@ -171,8 +170,7 @@ namespace PostProcessorGui.ViewModels
         }
         private void AboutWindowOpen(object obj)
         {
-            AboutWindow aboutWindow = new AboutWindow();
-            aboutWindow.Owner = Application.Current.MainWindow;
+            var aboutWindow = new AboutWindow {Owner = Application.Current.MainWindow};
             aboutWindow.ShowDialog();
         }
 
@@ -186,8 +184,7 @@ namespace PostProcessorGui.ViewModels
         }
         private void OpenSettings(object obj)
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.Owner = Application.Current.MainWindow;
+            SettingsWindow settingsWindow = new SettingsWindow {Owner = Application.Current.MainWindow};
             settingsWindow.ShowDialog();
         }
 

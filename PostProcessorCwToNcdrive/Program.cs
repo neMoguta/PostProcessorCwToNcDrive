@@ -25,8 +25,6 @@ namespace PostProcessor
                 _logger = LogManager.GetCurrentClassLogger();
                 _logger.Info("Program start");
 
-                //IEnumerable<string> contents = File.ReadAllLines(options.InputFile, Encoding.Default);
-
                 var data = File.ReadAllText(options.InputFile, Encoding.Default);
 
                 Parser parser = new Parser();
@@ -35,7 +33,7 @@ namespace PostProcessor
                 var buffer = new Queue<Command>();
                 blocks.ToList().ForEach(b =>
                 {
-                    var blockLines = b.Data.Split(new[] {"\r\n"}, StringSplitOptions.None);
+                    var blockLines = b.Data.Split(new[] { "\r\n" }, StringSplitOptions.None);
 
                     var blockInstructions = parser.GetInstructions(blockLines);
                     foreach (var instruction in blockInstructions)
@@ -46,7 +44,7 @@ namespace PostProcessor
 
                 var instructions = buffer;
 
-                var gen = new Generator(false,false,"");
+                var gen = new Generator(addM00AtOperationEnd:true, addCustomOn: false, additionalOperationCommands: null);
                 var result = gen.GenerateMillProgramm(instructions);
 
                 File.WriteAllText(Path.Combine(

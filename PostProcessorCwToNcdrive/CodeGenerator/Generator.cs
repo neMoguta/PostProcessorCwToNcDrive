@@ -9,8 +9,7 @@ namespace PostProcessor.CodeGenerator
 {
     public class Generator : GeneratorBase
     {
-        public Generator(bool addM00AtOperationEnd, bool addCustomOn, string additionalOperationCommands = null)
-            : base()
+        public Generator(bool addM00AtOperationEnd, bool addCustomOn, string additionalOperationCommands = null): base()
         {
             _addM00AtOperationEnd = addM00AtOperationEnd;
             _addCustomOn = addCustomOn;
@@ -44,13 +43,7 @@ namespace PostProcessor.CodeGenerator
                         break;
 
                     case CamOperations.OperationEnd:
-                        EnqueueOperationFooter(millProgramm,
-                            currentline,
-                            operationName: operationSettings[0],
-                            additionalCommands: _additionalOperationCommands,
-                            customOn:_addCustomOn,
-                            m00On:_addM00AtOperationEnd
-                            );
+                        EnqueueOperationFooter(millProgramm, currentline, operationSettings[0], _additionalOperationCommands, _addCustomOn, _addM00AtOperationEnd);
                         currentline++;
                         break;
 

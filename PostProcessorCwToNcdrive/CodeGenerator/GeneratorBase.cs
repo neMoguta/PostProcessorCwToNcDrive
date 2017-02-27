@@ -30,7 +30,7 @@ namespace PostProcessor.CodeGenerator
             ncDriveProgram.Enqueue("(Start: " + operationHeader + ")");
         }
 
-        public void EnqueueOperationFooter(Queue<string> ncDriveProgram, int? currentLine, string operationName, string additionalCommands = null, bool customOn=false, bool m00On = true)
+        public void EnqueueOperationFooter(Queue<string> ncDriveProgram, int? currentLine, string operationName, string additionalCommands = null, bool customOn = false, bool m00On = true)
         {
             _logger.Info(operationName);
 
@@ -38,11 +38,11 @@ namespace PostProcessor.CodeGenerator
                 ncDriveProgram.Enqueue(additionalCommands);
 
             ncDriveProgram.Enqueue("(End: " + operationName + ")");
-            if(m00On)
+            if (m00On)
                 ncDriveProgram.Enqueue("N" + currentLine + " M00");
         }
 
-        public void EnqueueSetFeedRate(Queue<string> ncDriveProgram, int? currentLine, string feedRate, string mock=null)
+        public void EnqueueSetFeedRate(Queue<string> ncDriveProgram, int? currentLine, string feedRate)
         {
             ncDriveProgram.Enqueue("N" + currentLine + " F" + feedRate);
         }
@@ -118,15 +118,15 @@ namespace PostProcessor.CodeGenerator
                     break;
 
                 case MillMoveTypes.Circle:
-                    lineNumber = EnqueuCircleCommand(millProgram, lineNumber, operationParams);
+                    lineNumber = EnqueueCircleCommand(millProgram, lineNumber, operationParams);
                     break;
 
                 case MillMoveTypes.RapidMove:
-                    lineNumber = EnqueuRapidMoveCommand(millProgram, lineNumber, operationParams);
+                    lineNumber = EnqueueRapidMoveCommand(millProgram, lineNumber, operationParams);
                     break;
 
                 case MillMoveTypes.Move:
-                    lineNumber = EnqueuMoveCommand(millProgram, lineNumber, operationParams);
+                    lineNumber = EnqueueMoveCommand(millProgram, lineNumber, operationParams);
                     break;
 
                 default:
@@ -139,7 +139,7 @@ namespace PostProcessor.CodeGenerator
             return lineNumber;
         }
 
-        private static int EnqueuMoveCommand(Queue<string> millProgram, int lineNumber, string[] operationParams)
+        private static int EnqueueMoveCommand(Queue<string> millProgram, int lineNumber, string[] operationParams)
         {
             millProgram.Enqueue(
                 "N" + lineNumber + " G01 X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2]);
@@ -147,7 +147,7 @@ namespace PostProcessor.CodeGenerator
             return lineNumber;
         }
 
-        private int EnqueuRapidMoveCommand(Queue<string> millProgram, int lineNumber, string[] operationParams)
+        private int EnqueueRapidMoveCommand(Queue<string> millProgram, int lineNumber, string[] operationParams)
         {
             millProgram.Enqueue(
                 "N" + lineNumber + " X" + operationParams[0] + " Y" + operationParams[1] + " Z" + operationParams[2]);
@@ -157,7 +157,7 @@ namespace PostProcessor.CodeGenerator
             return lineNumber;
         }
 
-        private int EnqueuCircleCommand(Queue<string> millProgram, int lineNumber, string[] operationParams)
+        private int EnqueueCircleCommand(Queue<string> millProgram, int lineNumber, string[] operationParams)
         {
             var opCode = SettingsBuffer.Counterclockwise ? " G03" : " G02";
 

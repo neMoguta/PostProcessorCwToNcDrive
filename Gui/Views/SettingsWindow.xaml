@@ -1,17 +1,13 @@
 ﻿<Window x:Class="PostProcessorGui.Views.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:viewModels="clr-namespace:PostProcessorGui.ViewModels"
-        
-        Title="Settings" Height="239.098" Width="310.173" WindowStartupLocation="CenterOwner"
-        
+        xmlns:viewModels="clr-namespace:PostProcessorGui.ViewModels"       
+        Title="Settings" Height="239.098" Width="310.173" WindowStartupLocation="CenterOwner"    
         >
-
 
     <Window.Resources>
         <viewModels:SettingsViewModel x:Key="SettingsModel"></viewModels:SettingsViewModel>
     </Window.Resources>
-    
 
     <Grid Background="#FFE5E5E5" DataContext="{StaticResource SettingsModel}" >
         <Grid.ColumnDefinitions>
