@@ -4,10 +4,10 @@
         xmlns:viewModels1="clr-namespace:PostProcessorGui.ViewModels"
         Title="Info" Height="275" Width="389.213" WindowStartupLocation="CenterOwner">
     <Window.Resources>
-        <viewModels1:GeneratorViewModel x:Key="GeneratorModel"></viewModels1:GeneratorViewModel>
+        <viewModels1:AboutViewModel x:Key="AboutModel"></viewModels1:AboutViewModel>
     </Window.Resources>
 
-    <Grid Background="#FFF3F3F3" DataContext="{StaticResource GeneratorModel}">
+    <Grid Background="#FFF3F3F3" DataContext="{StaticResource AboutModel}">
         <FlowDocumentScrollViewer VerticalScrollBarVisibility="Disabled" FontFamily="Italic">
             <FlowDocument FontSize="14"  >
                 <Paragraph>Post processor for integration Cam Works generated tollpath programm with NcDrive.
@@ -24,7 +24,7 @@
                 <Paragraph/>
                 <Paragraph FontSize="11" FontFamily="Segoe Print">
                     But in any case you can always buy a
-                    <Hyperlink Command="{Binding NavigateCommand}">
+                    <Hyperlink Command="{Binding NavigateToDonateCommand}">
                         cup of coffe
                     </Hyperlink>
                     for developer

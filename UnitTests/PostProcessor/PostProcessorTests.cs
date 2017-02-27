@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PostProcessor.CodeGenerator;
 using PostProcessor.IncomeDataParser;
 
-namespace UnitTests
+namespace UnitTests.PostProcessor
 {
     [TestClass]
     public class GeneratorTests : GeneratorTestsBase

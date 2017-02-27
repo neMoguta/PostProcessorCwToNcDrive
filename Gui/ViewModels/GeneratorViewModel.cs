@@ -182,41 +182,13 @@ namespace PostProcessorGui.ViewModels
                 return _settingsCommand ?? (_settingsCommand = new RelayCommand(OpenSettings));
             }
         }
+
         private void OpenSettings(object obj)
         {
             SettingsWindow settingsWindow = new SettingsWindow {Owner = Application.Current.MainWindow};
             settingsWindow.ShowDialog();
         }
 
-        private RelayCommand _navigateToYTubeCommand;
-
-        public RelayCommand NavigateToYTubeCommand
-        {
-            get
-            {
-                return _navigateToYTubeCommand ?? (_navigateToYTubeCommand = new RelayCommand(NavigateToYTube));
-            }
-        }
-
-        private void NavigateToYTube(object obj)
-        {
-            System.Diagnostics.Process.Start(
-                new Uri(@"https://youtu.be/YgNbZjzj8Jc").ToString());
-        }
-
-        private RelayCommand _navigateCommand;
-        public RelayCommand NavigateCommand
-        {
-            get
-            {
-                return _navigateCommand ?? (_navigateCommand = new RelayCommand(Navigate));
-            }
-        }
-        private void Navigate(object obj)
-        {
-            System.Diagnostics.Process.Start(
-                new Uri(@"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4W7P2W2ZQ4RE4").ToString());
-        }
 
         private RelayCommand _addCamFileCommand;
         public RelayCommand AddCamFileCommand
@@ -226,6 +198,7 @@ namespace PostProcessorGui.ViewModels
                 return _addCamFileCommand ?? (_addCamFileCommand = new RelayCommand(AddCamFile));
             }
         }
+
         private void AddCamFile(object arg)
         {
             var dialog = new OpenFileDialog

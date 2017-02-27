@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostProcessor", "PostProcessor.csproj", "{418427F9-813A-4DA9-922C-973DD7C3FA82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostProcessorUnitTests", "..\UnitTests\PostProcessorUnitTests.csproj", "{41759403-80D8-40A7-827A-B72F10678C0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{41759403-80D8-40A7-827A-B72F10678C0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostProcessorGui", "..\Gui\PostProcessorGui.csproj", "{38AC48A5-2D2E-4DFB-9FEF-BD10252D0922}"
 EndProject

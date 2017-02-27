@@ -90,6 +90,7 @@ namespace PostProcessorGui.ViewModels
         {
             get { return _windowClosingCommand ?? (_windowClosingCommand = new RelayCommand(Closing)); }
         }
+
         private void Closing(object obj)
         {
             Properties.Settings.Default.Save();

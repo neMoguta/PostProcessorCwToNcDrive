@@ -10,13 +10,6 @@ namespace PostProcessorGui.Views
         public MainWindow()
         {
             InitializeComponent();
-
-            //Loaded += MainWindowLoaded;
         }
-
-        //private void MainWindowLoaded(object sender, RoutedEventArgs e)
-        //{
-        //    DataContext = new GeneratorViewModel();
-        //}
     }
 }

@@ -36,7 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -51,11 +53,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="GeneratorTests.cs" />
-    <Compile Include="GeneratorTestsBase.cs" />
+    <Compile Include="Gui\GeneratorViewModelTests.cs" />
+    <Compile Include="Gui\SettingsViewModelTests.cs" />
+    <Compile Include="Gui\ViewModelTestsBase.cs" />
+    <Compile Include="PostProcessor\PostProcessorTests.cs" />
+    <Compile Include="PostProcessor\PostProcessorTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gui\PostProcessorGui.csproj">
+      <Project>{38AC48A5-2D2E-4DFB-9FEF-BD10252D0922}</Project>
+      <Name>PostProcessorGui</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PostProcessorCwToNcdrive\PostProcessor.csproj">
       <Project>{418427f9-813a-4da9-922c-973dd7c3fa82}</Project>
       <Name>PostProcessor</Name>
